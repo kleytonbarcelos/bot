@@ -2,7 +2,7 @@ const routes = require("express").Router();
 const TokenController = require("./controllers/TokenController");
 
 routes.get("/", async (req, res) => {
-  res.status(200).json("");
+  res.status(200).json("ok");
 });
 
 routes.get("/tokens", TokenController.Index);

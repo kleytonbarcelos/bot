@@ -7,11 +7,9 @@ const TokenSchema = new mongoose.Schema({
   },
   symbol: {
     type: String,
-    required: true
   },
   name: {
     type: String,
-    required: true
   },
   spend: {
     type: String,
