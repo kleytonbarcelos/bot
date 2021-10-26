@@ -1,48 +1,51 @@
-const Token = import("../models/Token");
+const Token = require("../models/Token");
 
-export async function Index(req, res) {
+module.exports = {
+  async Index(req, res) {
     let data;
     if (req.query) {
-        let query = req.query;
-        data = await Token.find(query);
+      let query = req.query;
+      data = await Token.find(query);
     } else {
-        data = await Token.find();
+      data = await Token.find();
     }
     return res.json(data);
-}
-export async function Get(req, res) {
+  },
+  async Get(req, res) {
     try {
-        let query = req.query;
-        let data = await Token.findOne(query);
-        return res.json(data);
+      let query = req.query;
+      let data = await Token.findOne(query);
+      return res.json(data);
     } catch (error) {
-        return res.status(400).json(error);
+      return res.status(400).json(error);
     }
-}
-export async function Search(req, res) {
+  },
+  async Search(req, res) {
     try {
-        let query = req.query;
-        let data = await Token.find(query);
-        return res.json(data);
+      let query = req.query;
+      let data = await Token.find(query);
+      return res.json(data);
     } catch (error) {
-        return res.status(400).json(error);
+      return res.status(400).json(error);
     }
-}
-export async function Store(req, res) {
+  },
+  async Store(req, res) {
+    console.log(req.body);
     const { token } = req.body;
     if (await Token.findOne({ token }))
-        return res.status(400).json({ error: "Token is alread registered" });
+      return res.status(400).json({ error: "Token is alread registered" });
 
     const data = await Token.create(req.body);
     return res.json(data);
-}
-export async function Put(req, res) {
+  },
+  async Put(req, res) {
     let { id } = req.body;
     let token = await Token.updateOne({ id }, { $set: req.body });
     return res.json(token);
-}
-export async function Delete(req, res) {
+  },
+  async Delete(req, res) {
     let { id } = req.params;
     let token = await Token.deleteOne({ _id: id });
     return res.json(token);
-}
+  }
+};

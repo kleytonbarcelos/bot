@@ -1,5 +1,5 @@
-const routes = import("express").Router();
-const TokenController = import("./controllers/TokenController");
+const routes = require("express").Router();
+const TokenController = require("./controllers/TokenController");
 
 routes.get("/", async (req, res) => {
   res.status(200).json("");

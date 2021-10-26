@@ -1,4 +1,4 @@
-const mongoose = import("mongoose");
+const mongoose = require("mongoose");
 
 const TokenSchema = new mongoose.Schema({
   slug: {
@@ -13,11 +13,11 @@ const TokenSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  amount: {
+  spend: {
     type: String,
     required: true
   },
-  price: {
+  amount: {
     type: String,
     required: true
   },
@@ -27,4 +27,4 @@ const TokenSchema = new mongoose.Schema({
   }
 });
 
-export default mongoose.model("Token", TokenSchema);
+module.exports = mongoose.model("Token", TokenSchema);

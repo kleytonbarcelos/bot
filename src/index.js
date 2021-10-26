@@ -1,14 +1,14 @@
-const express = import("express");
+const express = require("express");
 const app = express();
-const mongoose = import("mongoose");
-const dotenv = import("dotenv");
-const cors = import("cors");
-const morgan = import("morgan");
-const http = import("http");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const morgan = require("morgan");
+const http = require("http");
 
 dotenv.config();
 
-const routes = import("./routes");
+const routes = require("./routes");
 const server = http.Server(app);
 
 app.use(cors());
