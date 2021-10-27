@@ -1,40 +1,37 @@
 const Token = require("../models/Token");
 
 module.exports = {
-  async Index(req, res) {
+  async index(req, res) {
     let tokens;
-    if (req.query) {
-      let query = req.query;
-      return res.json(req.query);
-      tokens = await Token.find(query);
+    if (Object.keys(req.query).length) {
+      tokens = await Token.find(req.query);
     } else {
       tokens = await Token.find();
     }
-    tokens = await Token.find();
     return res.status(200).json(tokens);
   },
-  async Store(req, res) {
+  async store(req, res) {
     try {
-      const { slug } = req.body;
+      const { slug } = req.body; //unique iditification
       if (await Token.findOne({ slug }))
       return res.status(400).json({ error: "Token is alread registered" });
       
       const token = await Token.create(req.body);
-      return res.status(201).json(token);
+      return res.status(200).json(token);
     } catch (error) {
       return res.status(400).json(error)
     }
   },
-  async Put(req, res) {
+  async put(req, res) {
     try {
-      let { id } = req.body;
-      let token = await Token.updateOne({ id }, { $set: req.body });
-      return res.json(token);
+      let { _id } = req.body;
+      let token = await Token.updateOne({ _id }, { $set: req.body });
+      return res.status(200).json(token);
     } catch (error) {
       return res.status(400).json(error)
     }
   },
-  async Delete(req, res) {
+  async delete(req, res) {
     try {
       let { id } = req.params;
       let token = await Token.deleteOne({ _id: id });
@@ -43,7 +40,7 @@ module.exports = {
       return res.status(400).json(error)
     }
   },
-  async Get(req, res) {
+  async get(req, res) {
     try {
       let query = req.query;
       let data = await Token.findOne(query);
@@ -52,7 +49,7 @@ module.exports = {
       return res.status(400).json(error);
     }
   },
-  async Search(req, res) {
+  async search(req, res) {
     try {
       let query = req.query;
       let data = await Token.find(query);
